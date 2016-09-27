@@ -16,6 +16,7 @@
 
 package org.microg.gms.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.support.annotation.NonNull;
@@ -25,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 
+import android.widget.Toast;
 import com.google.android.gms.R;
 
 import org.microg.tools.selfcheck.InstalledPackagesChecks;
@@ -118,6 +120,14 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
             reset(LayoutInflater.from(getContext()));
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (requestCode == NlpStatusChecks.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                reset(LayoutInflater.from(getContext()));
+            else
+                super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
